@@ -46,7 +46,15 @@ df['VENDEDOR_DO_MERCADOLIVRE'].fillna('indefinido', inplace=True)
 
 
 df.rename(columns={'CARTÕES':'CARTOES'}, inplace=True)
-df.to_csv('cet_processado.csv', index=False)
+
 valoresAusentes = df.isnull().sum()
-df['VALOR_COMISSAO'].replace(",",".", inplace=True)
-print(df.groupby('VALOR_COMISSAO').size())
+# substitui virgula na coluna por ponto
+#df['VALOR_PAGTO'] = df['VALOR_PAGTO'].str.replace(',', '-').astype(float)
+df['VALOR_PAGTO'] = df['VALOR_PAGTO'].str.replace(',', '#')
+#df['VALOR_PAGTO'] = df['VALOR_PAGTO'].str.replace('.', '')
+#df['VALOR_PAGTO'] = df['VALOR_PAGTO'].str.replace('#', '.')
+print(df.groupby('VALOR_PAGTO').size())
+ 
+
+
+ 
